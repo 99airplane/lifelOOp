@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Heart, Leaf, Activity, Sun, Moon, Droplets } from 'lucide-react-native';
+import { Heart, Leaf, Activity, Sun, Moon, Droplets, Zap } from 'lucide-react-native';
 
 const MetricCard = ({ icon: Icon, title, value, unit, color, trend }: any) => (
   <View style={[styles.metricCard, { borderLeftColor: color }]}>
