@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Switch } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Switch, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { User, Settings, Bell, Shield, CircleHelp as HelpCircle, LogOut, ChevronRight, CreditCard as Edit, Star, Award, Activity, Leaf } from 'lucide-react-native';
 
@@ -84,6 +84,9 @@ export default function Profile() {
           >
             <Edit size={16} color="#6366F1" />
             <Text style={styles.editButtonText}>Edit Profile</Text>
+          </TouchableOpacity>
+        </View>
+      </LinearGradient>
 
       <View style={styles.content}>
         <View style={styles.statsContainer}>
