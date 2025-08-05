@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Brain, Zap, Leaf, Heart, Sun, Moon, Activity, Clock } from 'lucide-react-native';
 
@@ -170,7 +170,19 @@ export default function Recommendations() {
               <RecommendationCard
                 key={index}
                 {...rec}
-                onAction={() => console.log('Action:', rec.title)}
+                onAction={() => {
+                  Alert.alert(
+                    'Recommendation Started',
+                    `Great choice! You've started: ${rec.title}`,
+                    [
+                      { 
+                        text: 'Mark as Done', 
+                        onPress: () => Alert.alert('Completed!', 'Recommendation marked as completed. +25 points earned!') 
+                      },
+                      { text: 'Remind me later', style: 'cancel' }
+                    ]
+                  );
+                }}
               />
             ))}
           </View>

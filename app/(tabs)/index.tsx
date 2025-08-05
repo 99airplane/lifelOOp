@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { router } from 'expo-router';
 import { Heart, Leaf, Activity, Sun, Moon, Droplets, Zap } from 'lucide-react-native';
 
 const MetricCard = ({ icon: Icon, title, value, unit, color, trend }: any) => (
@@ -92,25 +93,36 @@ export default function Dashboard() {
               icon={Sun}
               title="Log Mood"
               color="#F59E0B"
-              onPress={() => {}}
+              onPress={() => Alert.alert('Mood Logger', 'How are you feeling today?', [
+                { text: 'Great 😊', onPress: () => Alert.alert('Logged!', 'Great mood logged successfully') },
+                { text: 'Good 🙂', onPress: () => Alert.alert('Logged!', 'Good mood logged successfully') },
+                { text: 'Okay 😐', onPress: () => Alert.alert('Logged!', 'Okay mood logged successfully') },
+                { text: 'Not great 😔', onPress: () => Alert.alert('Logged!', 'We hope your day gets better!') },
+                { text: 'Cancel', style: 'cancel' }
+              ])}
             />
             <QuickAction
               icon={Activity}
               title="Start Workout"
               color="#EF4444"
-              onPress={() => {}}
+              onPress={() => Alert.alert('Workout Started', 'Great! Your workout session has begun. Stay hydrated and push yourself!', [
+                { text: 'Got it!', onPress: () => {} }
+              ])}
             />
             <QuickAction
               icon={Leaf}
               title="Eco Challenge"
               color="#22C55E"
-              onPress={() => {}}
+              onPress={() => router.push('/challenges')}
             />
             <QuickAction
               icon={Moon}
               title="Sleep Mode"
               color="#6366F1"
-              onPress={() => {}}
+              onPress={() => Alert.alert('Sleep Mode', 'Activating sleep mode will enable Do Not Disturb and dim your screen.', [
+                { text: 'Activate', onPress: () => Alert.alert('Sleep Mode Active', 'Sweet dreams! Sleep mode is now active.') },
+                { text: 'Cancel', style: 'cancel' }
+              ])}
             />
           </View>
         </View>
