@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Users, Trophy, Leaf, Activity, Heart, Zap, Calendar, Star } from 'lucide-react-native';
 
@@ -182,7 +182,19 @@ export default function Challenges() {
                 <ChallengeCard
                   key={index}
                   {...challenge}
-                  onJoin={() => console.log('Joined:', challenge.title)}
+                  onJoin={() => {
+                    Alert.alert(
+                      'Join Challenge',
+                      `Are you ready to join "${challenge.title}"?`,
+                      [
+                        { 
+                          text: 'Join Now', 
+                          onPress: () => Alert.alert('Welcome!', `You've successfully joined ${challenge.title}! Good luck!`) 
+                        },
+                        { text: 'Maybe later', style: 'cancel' }
+                      ]
+                    );
+                  }}
                 />
               ))}
             </View>

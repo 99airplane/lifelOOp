@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Target, Plus, Calendar, TrendingUp, Heart, Leaf, Activity, Clock } from 'lucide-react-native';
 
@@ -87,6 +87,8 @@ const getCategoryIcon = (category: string, size: number, color: string) => {
 export default function Goals() {
   const [activeTab, setActiveTab] = useState('active');
   const [showAddGoal, setShowAddGoal] = useState(false);
+  const [goalTitle, setGoalTitle] = useState('');
+  const [goalDescription, setGoalDescription] = useState('');
 
   const goals = [
     {
@@ -202,7 +204,18 @@ export default function Goals() {
                 <GoalCard
                   key={index}
                   {...goal}
-                  onEdit={() => console.log('Edit goal:', goal.title)}
+                  onEdit={() => {
+                    Alert.alert(
+                      'Goal Options',
+                      `What would you like to do with "${goal.title}"?`,
+                      [
+                        { text: 'Update Progress', onPress: () => Alert.alert('Progress Updated', 'Your progress has been updated!') },
+                        { text: 'Edit Goal', onPress: () => Alert.alert('Edit Mode', 'Goal editing feature coming soon!') },
+                        { text: 'View Details', onPress: () => Alert.alert('Goal Details', goal.description) },
+                        { text: 'Cancel', style: 'cancel' }
+                      ]
+                    );
+                  }}
                 />
               ))}
             </View>
@@ -237,23 +250,40 @@ export default function Goals() {
               style={styles.input}
               placeholder="Goal title"
               placeholderTextColor="#9CA3AF"
+              value={goalTitle}
+              onChangeText={setGoalTitle}
             />
             <TextInput
               style={styles.input}
               placeholder="Description"
               placeholderTextColor="#9CA3AF"
               multiline
+              value={goalDescription}
+              onChangeText={setGoalDescription}
             />
             <View style={styles.modalButtons}>
               <TouchableOpacity
                 style={styles.cancelButton}
-                onPress={() => setShowAddGoal(false)}
+                onPress={() => {
+                  setShowAddGoal(false);
+                  setGoalTitle('');
+                  setGoalDescription('');
+                }}
               >
                 <Text style={styles.cancelButtonText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.saveButton}
-                onPress={() => setShowAddGoal(false)}
+                onPress={() => {
+                  if (goalTitle.trim()) {
+                    Alert.alert('Goal Created!', `"${goalTitle}" has been added to your goals.`);
+                    setShowAddGoal(false);
+                    setGoalTitle('');
+                    setGoalDescription('');
+                  } else {
+                    Alert.alert('Error', 'Please enter a goal title.');
+                  }
+                }}
               >
                 <Text style={styles.saveButtonText}>Save Goal</Text>
               </TouchableOpacity>

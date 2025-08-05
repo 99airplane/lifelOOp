@@ -78,12 +78,12 @@ export default function Profile() {
           </View>
           <Text style={styles.userName}>Alex Chen</Text>
           <Text style={styles.userEmail}>alex.chen@email.com</Text>
-          <TouchableOpacity style={styles.editButton}>
+          <TouchableOpacity 
+            style={styles.editButton}
+            onPress={() => Alert.alert('Edit Profile', 'Profile editing feature coming soon!')}
+          >
             <Edit size={16} color="#6366F1" />
             <Text style={styles.editButtonText}>Edit Profile</Text>
-          </TouchableOpacity>
-        </View>
-      </LinearGradient>
 
       <View style={styles.content}>
         <View style={styles.statsContainer}>
