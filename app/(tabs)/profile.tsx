@@ -172,9 +172,16 @@ export default function Profile() {
         </View>
 
         <View style={styles.section}>
-          <TouchableOpacity style={styles.logoutButton}>
+          <TouchableOpacity 
+            style={styles.logoutButton}
+            onPress={() => Alert.alert('Sign Out', 'Are you sure you want to sign out?', [
+              { text: 'Cancel', style: 'cancel' },
+              { text: 'Sign Out', style: 'destructive', onPress: () => console.log('User signed out') }
+            ])}
+          >
             <LogOut size={20} color="#EF4444" />
             <Text style={styles.logoutText}>Sign Out</Text>
+          </TouchableOpacity>
           </TouchableOpacity>
         </View>
 
